@@ -40,7 +40,6 @@ insert physicalorder values(1, 'test');
 insert physicalorder values(2, 'test');
 insert physicalorder values(3, 'test');
 
-
 create table Book(
 BookID int not null primary key, 
 Title varchar(255) not null,
@@ -58,7 +57,7 @@ WordCount int not null);
 
 insert Novel values(1, "test", 1);
 insert Novel values(2, "test", 1);
-insert Novel values(2, "test", 1);
+insert Novel values(3, "test", 1);
 
 create table Author(
 AuthorID int not null primary key,
@@ -76,6 +75,7 @@ insert Genre values("test");
 insert Genre values("mystery");
 insert Genre values("Brandon");
 
+
 create table OrderLine(
 OrderID int not null,
 BookID int not null, 
@@ -85,6 +85,10 @@ Constraint fk_orderid foreign key (OrderID) references Orders
 (OrderID),
 Constraint fk_bookid foreign key (BookID) references Book(BookID)
 );
+
+insert orderline values (1, 1, 10);
+insert orderline values (2, 2, 10);
+insert orderline values (3, 3, 10);
 
 create table ReadingHistory(
 OrderID int not null,
@@ -97,14 +101,22 @@ Constraint fk_stuff foreign key (OrderID) references Orders
 Constraint fk_novelid foreign key (NovelID) references Novel(NovelID)
 );
 
+insert readinghistory values(1,1, 11111111, 1);
+insert readinghistory values(2,2, 11111111, 1); 
+insert readinghistory values(3,3, 11111111, 1); 
+
 create table BelongsTo(
 NovelID int not null,
-AuthorName varchar(255) not null,
-primary key (NovelID, AuthorName),
+GenreName varchar(255) not null,
+primary key (NovelID, GenreName),
 Constraint fk foreign key (NovelID) 
 references Novel(NovelID),
-Constraint foreign_key foreign key (AuthorName) references 
-author(AuthorName)); 
+Constraint foreign_key foreign key (GenreName) references 
+Genre(GenreName)); 
+
+insert BelongsTo values(1,"Brandon");
+insert BelongsTo values(2, "mystery");
+insert BelongsTo values(3, "test"); 
 
 create table Writes(
 AuthorID int not null,
@@ -115,3 +127,6 @@ references Author(AuthorID),
 constraint fk_novelid1 foreign key (NovelID)
 references Novel(NovelId)); 
 
+insert Writes values(1,1);
+insert Writes values(2,2);
+insert Writes values(3,3);
