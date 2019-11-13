@@ -28,9 +28,18 @@ create table DigitalOrder(
 OrderID int not null primary key,
 SubscriptionType varchar(255) not null); 
 
+insert DigitalOrder values (1, 'test');
+insert DigitalOrder values (2, 'test');
+insert DigitalOrder values (3, 'test');
+
 create table PhysicalOrder(
 OrderID int not null primary key,
 ShippingMethod varchar(255) not null); 
+
+insert physicalorder values(1, 'test');
+insert physicalorder values(2, 'test');
+insert physicalorder values(3, 'test');
+
 
 create table Book(
 BookID int not null primary key, 
@@ -38,18 +47,34 @@ Title varchar(255) not null,
 Price double not null,
 ReleaseDate date not null); 
 
+insert Book values(1, 'test', 1.0, 11111111);
+insert Book values(2, 'test', 1.0, 11111111);
+insert Book values(3, 'test', 1.0, 11111111);
+
 create table Novel(
 NovelID int not null primary key,
 Title varchar(255) not null,
 WordCount int not null); 
+
+insert Novel values(1, "test", 1);
+insert Novel values(2, "test", 1);
+insert Novel values(2, "test", 1);
 
 create table Author(
 AuthorID int not null primary key,
 AuthorName varchar(255) not null,
 DebutDate date not null); 
 
+insert Author values(1, 'test', 1111111);
+insert Author values(2, 'test', 1111111);
+insert Author values(3, 'test', 1111111);
+
 create table Genre(
 GenreName varchar(255) not null primary key); 
+
+insert Genre values("test");
+insert Genre values("mystery");
+insert Genre values("Brandon");
 
 create table OrderLine(
 OrderID int not null,
@@ -89,3 +114,4 @@ constraint fk_authorid foreign key (AuthorID)
 references Author(AuthorID),
 constraint fk_novelid1 foreign key (NovelID)
 references Novel(NovelId)); 
+
