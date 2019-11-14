@@ -25,38 +25,53 @@ alter table MATCH_HISTORY add constraint mh_fk1 foreign key MATCH_HISTORY (Match
 alter table MATCH_HISTORY add constraint mh_fk2 foreign key MATCH_HISTORY (TeamID) references TEAMS (TeamID);
 
 #Andrew's Code
-create table Teams(
+create table TEAMS(
 TeamID int primary key, 
 TeamName varchar(255), 
 MatchesWon int, 
 MatchesLost int);
 
-create table CurrentTeamMembers(
+create table CURRENT_TEAM_MEMBERS(
 TeamID int,
-PlayerID int, 
+PlayerID int,
 primary key (TeamID, PlayerID), 
 constraint fk_teamid foreign key (TeamID)
 references Teams(TeamID),
 constraint fk_playerid foreign key (PlayerID)
-references Player(PlayerID)); 
+references PLAYER(PlayerID)); 
 
-create table CurrentCoaches(
+create table CURRENT_COACHES(
 TeamID int,
 CoachID int,
 primary key (TeamID, CoachID),
 constraint fk_ccTeamID foreign key (TeamID)
 references Teams(TeamID),
 constraint fk_ccCoachID foreign key (CoachID)
-references Coaches(CoachID)
+references COACHES(CoachID)
 );
 
-create table PreviousTeamsCoached(
+create table PREVIOUS_TEAMS_COACHED(
 CoachID int, 
 TeamID int,
 primary key (CoachID, TeamID),
 constraint fk_ptcCoachID foreign key (CoachID)
 references Coaches(CoachID),
 constraint fk_ptcTeamID foreign key (TeamID)
-references Teams(TeamID)
+references TEAMS(TeamID)
 );
 
+#Fields
+create table FIELDS (FieldID int primary key, FieldName varchar(255), 
+Street varchar(255), City varchar(255), State varchar(255), Zip int, StadiumCap int);
+
+#Matches
+create table MATCHES (MatchID int, WinningTeam varchar(4), Score int, Field varchar(255), TimePlayed varchar(255), GameDate Date, MatchCompleted varchar(3), FieldID int primary key);
+
+#Teams Playing
+create table TEAMS_PLAYING (MatchID int(255), TeamID int(255));
+alter table TEAMS_PLAYING add constraint mp_pk primary key (MatchID, TeamID);
+alter table TEAMS_PLAYING add constraint mp_fk1 foreign key TEAMS_PLAYING (MatchID) references MATCHES (MatchID);
+alter table TEAMS_PLAYING add constraint mp_fk2 foreign key TEAMS_PLAYING (TeamID) references TEAMS (TeamID);
+
+#Coaches
+create table COACHES (CoachID int primary key , Name varchar(4), age int, CurrentTeam varchar(255), TeamID int primary key);
