@@ -1,3 +1,5 @@
+#Teams
+
 create table TEAMS(
 TeamID int primary key, 
 TeamName varchar(255), 
@@ -10,14 +12,14 @@ LastName varchar(255), Age int(255), CurrentTeam int(255));
 alter table PLAYERS add constraint ct_fk foreign key PLAYERS (CurrentTeam) references TEAMS (TeamID);
 
 #Coaches
-create table COACHES (CoachID int , Name varchar(4), age int, CurrentTeam varchar(255), TeamID int);
+create table COACHES (CoachID int , Name varchar(255), age int, TeamID int);
 
 
 
 alter table COACHES add constraint coach_pk primary key COACHES (CoachID, TeamID);
 
 #Matches
-create table MATCHES (MatchID int, Field varchar(255), Time varchar (5), GameDate Date , Match_Type Enum ('Future', 'Played'), FieldID int);
+create table MATCHES (MatchID int, GameDate Date , Match_Type Enum ('Future', 'Played'), FieldID int);
 alter table MATCHES add constraint ma_pk primary key (MatchID, FieldID);
 
 #Future Match
@@ -26,8 +28,9 @@ Alter table FUTURE_MATCH add constraint fm_pk primary key(MatchID);
 Alter table FUTURE_MATCH add constraint fm_fk foreign key FUTURE_MATCH (MatchID) references MATCHES (MatchID);
 
 #Played Match
-Create table PLAYED_MATCH (MatchID int primary key, Time varchar(5));
-Alter table PLAYED_MATCH add constraint pm_fk foreign key PLAYED_MATCH (MatchID) references MATCHES (MatchID);
+Create table PLAYED_MATCH (MatchID int primary key, WinningTeam int, score varchar(255));
+Alter table PLAYED_MATCH add constraint mp1_fk foreign key PLAYED_MATCH (MatchID) references MATCHES (MatchID);
+Alter table PLAYED_MATCH add constraint mp2_fk foreign key PLAYED_MATCH (WinningTeam) references TEAMS (TeamID);
 
 #Fields
 create table FIELDS (FieldID int primary key, FieldName varchar(255), 
@@ -83,8 +86,18 @@ references TEAMS(TeamID)
 );
 
 #Teams Playing
-create table TEAMS_PLAYING (MatchID int(255), TeamID int(255));
-alter table TEAMS_PLAYING add constraint mp_pk primary key (MatchID, TeamID);
+create table TEAMS_PLAYING (MatchID int(255), HomeTeam int(255), AwayTeam int(255));
+alter table TEAMS_PLAYING add constraint tp_pk primary key (MatchID);
 
 alter table TEAMS_PLAYING add constraint tp_fk1 foreign key TEAMS_PLAYING (MatchID) references MATCHES (MatchID);
-alter table TEAMS_PLAYING add constraint tp_fk2 foreign key TEAMS_PLAYING (TeamID) references TEAMS (TeamID);
+alter table TEAMS_PLAYING add constraint tp_fk2 foreign key TEAMS_PLAYING (HomeTeam) references TEAMS (TeamID);
+alter table TEAMS_PLAYING add constraint tp_fk3 foreign key TEAMS_PLAYING (AwayTeam) references TEAMS (TeamID);
+
+
+
+
+
+
+
+
+
