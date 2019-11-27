@@ -1,10 +1,6 @@
 #Teams
 
-create table TEAMS(
-TeamID int primary key, 
-TeamName varchar(255), 
-MatchesWon int, 
-MatchesLost int);
+create table TEAMS(TeamID int primary key, TeamName varchar(255), MatchesWon int, MatchesLost int);
 
 #Players Table
 create table PLAYERS (PlayerID int(255) primary key, FirstName varchar(255), 
@@ -12,10 +8,7 @@ LastName varchar(255), Age int(255), CurrentTeam int(255));
 alter table PLAYERS add constraint ct_fk foreign key PLAYERS (CurrentTeam) references TEAMS (TeamID);
 
 #Coaches
-create table COACHES (CoachID int , Name varchar(255), age int, TeamID int);
-
-
-
+create table COACHES (CoachID int , FullName varchar(255), age int, TeamID int);
 alter table COACHES add constraint coach_pk primary key COACHES (CoachID, TeamID);
 
 #Matches
@@ -92,12 +85,3 @@ alter table TEAMS_PLAYING add constraint tp_pk primary key (MatchID);
 alter table TEAMS_PLAYING add constraint tp_fk1 foreign key TEAMS_PLAYING (MatchID) references MATCHES (MatchID);
 alter table TEAMS_PLAYING add constraint tp_fk2 foreign key TEAMS_PLAYING (HomeTeam) references TEAMS (TeamID);
 alter table TEAMS_PLAYING add constraint tp_fk3 foreign key TEAMS_PLAYING (AwayTeam) references TEAMS (TeamID);
-
-
-
-
-
-
-
-
-
