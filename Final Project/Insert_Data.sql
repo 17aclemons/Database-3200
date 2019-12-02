@@ -45,18 +45,16 @@ Insert PREVIOUS_TEAMS_COACHED values (5, 1);
 Insert MATCHES values (1, '2001-01-01', 'Played', 1);
 insert MATCHES values (2, '2002-02-02', 'Played', 2); 
 Insert MATCHES values (3, '2020-02-20', 'Future', 3); 
-Insert MATCHES values (4, '2003-03-03', 'Played', 4); 
-Insert MATCHES values (5, '2020-03-03', 'Future', 5);
-Insert MATCHES values (6, '2020-04-04', 'Future', 6); 
+Insert MATCHES values (4, '2003-03-03', 'Played', 1); 
+Insert MATCHES values (5, '2020-03-03', 'Future', 2);
+Insert MATCHES values (6, '2020-04-04', 'Future', 3); 
 
 Insert FUTURE_MATCH values (3, '3:00pm');
-Insert FUTURE_MATCH values (5, '4:00pm');
-Insert FUTURE_MATCH values (6, '11:00am');
+Insert FUTURE_MATCH values (2, '4:00pm');
 
 Insert PLAYED_MATCH values (1, 1, '1-0' );
-Insert PLAYED_MATCH values (2, 1, '5-0');
+Insert PLAYED_MATCH values (2, 3, '5-0');
 Insert PLAYED_MATCH values (4, 2, '2-0' );
-
 
 Insert PREVIOUS_TEAMS values (1, 1);
 Insert PREVIOUS_TEAMS values (2, 2);
